@@ -15,9 +15,9 @@ public class PizzaMemDao implements IPizzaDao{
 		pizzaList = new ArrayList<Pizza>();
 		
 		pizzaList.add(new Pizza("PEP", "Pépéroni", 12.50, CategoriePizza.VIANDE));
-		pizzaList.add(new Pizza("MAR", "Margherita", 14.00, CategoriePizza.VIANDE));
+		pizzaList.add(new Pizza("MAR", "Margherita", 14.00, CategoriePizza.SANS_VIANDE));
 		pizzaList.add(new Pizza("REIN", "La reine", 11.50, CategoriePizza.VIANDE));
-		pizzaList.add(new Pizza("FRO", "La 4 fromages", 12.00, CategoriePizza.VIANDE));
+		pizzaList.add(new Pizza("FRO", "La 4 fromages", 12.00, CategoriePizza.SANS_VIANDE));
 		pizzaList.add(new Pizza("CAN", "La cannibale", 12.50, CategoriePizza.VIANDE));
 		pizzaList.add(new Pizza("SAV", "La savoyarde", 13.00, CategoriePizza.VIANDE));
 		pizzaList.add(new Pizza("ORI", "L'orientale", 13.50, CategoriePizza.VIANDE));
@@ -58,27 +58,13 @@ public class PizzaMemDao implements IPizzaDao{
 	public void deletePizza(String codePizza) {
 		// TODO Auto-generated method stub
 		boolean del = false;
+		
 		for(int i = 0; i < pizzaList.size(); i++)
 		{
 			if(!del && pizzaList.get(i) == findPizzaByCode(codePizza))
 			{
 				pizzaList.remove(i);
 				del = true;
-			}
-		}
-		int cpt = 0;
-		
-		if(pizzaExists(codePizza))
-		{
-			while(del || cpt < pizzaList.size())
-			{
-				if(pizzaList.get(cpt).getCode().equals(codePizza))
-				{
-					pizzaList.remove(cpt);
-					del = true;
-				}
-				else
-					cpt++;
 			}
 		}
 	}
