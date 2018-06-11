@@ -3,7 +3,6 @@ package fr.pizzeria.factory;
 import java.util.Scanner;
 
 import fr.pizza.dao.PizzaMemDao;
-import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.service.AjouterPizzaService;
 import fr.pizzeria.service.ListerPizzasService;
