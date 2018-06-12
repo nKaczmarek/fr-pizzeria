@@ -52,6 +52,8 @@ public class PizzaMemDao implements IPizzaDao{
 				cpt++;
 			}	
 		}
+		else
+			System.out.println("La pizza n'existe pas");
 	}
 
 	@Override
