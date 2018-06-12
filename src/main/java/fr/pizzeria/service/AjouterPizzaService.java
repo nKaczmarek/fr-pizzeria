@@ -18,11 +18,18 @@ public class AjouterPizzaService extends MenuService{
 	public void executeUC(Scanner scan, PizzaMemDao pizzaMemDao) throws SavePizzaException {
 		// TODO Auto-generated method stub
 		System.out.println("Entrez le code de la pizza :");
-		String code = scan.next();
+		String code = scan.nextLine();
 		System.out.println("Entrez le libellé de la pizza (sans espace) :");
-		String libelle = scan.next();
+		String libelle = scan.nextLine();
 		System.out.println("Entrez le prix de la pizza :");
-		double prix = scan.nextDouble();
+		//double prix = scan.nextDouble();
+		String sPrix = scan.nextLine();
+		double prix = 0;
+		try {
+			prix = Double.parseDouble(sPrix);
+		} catch (NumberFormatException e) {
+			throw new NumberFormatException();
+		}
 		if(prix < 0)
 			throw new SavePizzaException("prix inférieur à 0");
 		System.out.println("Entrez la catégorie de la pizza (1.viande/2.poisson/3.sans viande)");

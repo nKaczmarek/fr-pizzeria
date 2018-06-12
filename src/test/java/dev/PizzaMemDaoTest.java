@@ -40,7 +40,14 @@ public class PizzaMemDaoTest {
 
 	@Test
 	public void testUpdatePizza() {
-		fail("Not yet implemented");
+		Pizza p = pDao.findPizzaByCode("PEP");
+		pDao.updatePizza("PEP", new Pizza("PEPE","Pépéroni", 12.50, CategoriePizza.VIANDE));
+		assertTrue(p != pDao.findPizzaByCode("PEP"));
+		
+		p = pDao.findPizzaByCode("DEQ");
+		pDao.updatePizza("DEQ", new Pizza("PEPE","Pépéroni", 12.50, CategoriePizza.VIANDE));
+		assertTrue(p == null);
+		assertTrue(pDao.findPizzaByCode("DEQ") == null);
 	}
 
 	@Test
@@ -48,17 +55,26 @@ public class PizzaMemDaoTest {
 		int nbPizza = pDao.findAllPizzas().size();
 		pDao.deletePizza("PEP");
 		assertTrue(nbPizza > pDao.findAllPizzas().size());
+		nbPizza = pDao.findAllPizzas().size();
+		pDao.deletePizza(null);
+		assertTrue(nbPizza == pDao.findAllPizzas().size());
+		nbPizza = pDao.findAllPizzas().size();
+		pDao.deletePizza("BEQ");
+		assertTrue(nbPizza == pDao.findAllPizzas().size());
 	}
 
 	@Test
 	public void testFindPizzaByCode() {
-		fail("Not yet implemented");
+		assertTrue(pDao.findPizzaByCode("PEP").getCode() != null);
+		assertTrue(pDao.findPizzaByCode("testPiza") == null);
+		assertTrue(pDao.findPizzaByCode(null) == null);
 	}
 
 	@Test
 	public void testPizzaExists() {
 		assertTrue(pDao.pizzaExists("PEP"));
 		assertFalse(pDao.pizzaExists(""));
+		assertFalse(pDao.pizzaExists(null));
 	}
 
 }
