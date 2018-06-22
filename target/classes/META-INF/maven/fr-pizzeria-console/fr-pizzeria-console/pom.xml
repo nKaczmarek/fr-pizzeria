@@ -5,6 +5,12 @@
 	<artifactId>fr-pizzeria-console</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
 			<plugin>
@@ -30,5 +36,35 @@
 			<version>1.16.0</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.mariadb.jdbc</groupId>
+			<artifactId>mariadb-java-client</artifactId>
+			<version>1.1.7</version>
+		</dependency>
 	</dependencies>
+	<profiles>
+		<profile>
+			<id>jdbc</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<use>jdbc</use>
+				<driver>org.mariadb.jdbc.Driver</driver>
+				<dbUrl>jdbc:mariadb://localhost:3306/pizzeria</dbUrl>
+				<user>root</user>
+				<pwd></pwd>
+			</properties>
+		</profile>
+		<profile>
+			<id>cleverCloud</id>
+			<properties>
+				<use>cleverCloud</use>
+				<driver>org.mariadb.jdbc.Driver</driver>
+				<dbUrl>jdbc:mariadb://blrtabx2r-mysql.services.clever-cloud.com:3306/blrtabx2r</dbUrl>
+				<user>u8gpa4loszx9vywf</user>
+				<pwd>gKAWon0W3IG69vR5ULf</pwd>
+			</properties>
+		</profile>
+	</profiles>
 </project>

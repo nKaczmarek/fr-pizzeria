@@ -2,7 +2,8 @@ package fr.pizzeria.service;
 
 import java.util.Scanner;
 
-import fr.pizza.dao.PizzaMemDao;
+import fr.pizza.dao.IPizzaDao;
+import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
@@ -14,7 +15,7 @@ public class ModifierPizzaService extends MenuService{
 	}
 	
 	@Override
-	public void executeUC(Scanner scan, PizzaMemDao pizzaMemDao) {
+	public void executeUC(Scanner scan, IPizzaDao pizzaDao) throws StockageException {
 		// TODO Auto-generated method stub
 		System.out.println("Entrez le code de la pizza à modifier :");
 		String code = scan.next();
@@ -23,7 +24,8 @@ public class ModifierPizzaService extends MenuService{
 		System.out.println("Entrez le nouveau libelle :");
 		String nLibelle = scan.next();
 		System.out.println("Entrez le nouveau prix :");
-		double nPrix = scan.nextDouble();
+		String newPrix = scan.next();
+		Double nPrix = Double.parseDouble(newPrix);
 		System.out.println("Entrez la catégorie de la pizza (1.viande/2.poisson/3.sans viande)");
 		int categorie = scan.nextInt();
 		CategoriePizza nCat;
@@ -42,8 +44,8 @@ public class ModifierPizzaService extends MenuService{
 				nCat = CategoriePizza.SANS_VIANDE;
 			break;
 		}
-		pizzaMemDao.updatePizza(code, new Pizza(nCode, nLibelle, nPrix, nCat));
-
+		pizzaDao.updatePizza(code, new Pizza(nCode, nLibelle, nPrix, nCat));
+		
 	}
 
 }

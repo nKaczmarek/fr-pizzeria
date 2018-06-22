@@ -9,25 +9,25 @@ public class Pizza {
 	private CategoriePizza categoriePizza;
 	
 	private static int id_inc = 0;
-	public Pizza(String _code, String _libelle, double _prix, CategoriePizza _categoriePizza)
+	public Pizza(String code, String libelle, double prix, CategoriePizza categoriePizza)
 	{
 		
 		this.setId(id_inc);
-		this.setCode(_code);
-		this.setLibelle(_libelle);
-		this.setPrix(_prix);
-		this.setCategoriePizza(_categoriePizza);
+		this.setCode(code);
+		this.setLibelle(libelle);
+		this.setPrix(prix);
+		this.setCategoriePizza(categoriePizza);
 		id_inc++;
 	}
 	
-	public Pizza(int _id,String _code, String _libelle, double _prix, CategoriePizza _categoriePizza)
+	public Pizza(int id,String code, String libelle, double prix, CategoriePizza categoriePizza)
 	{
-		id_inc = _id;
-		this.setId(_id);
-		this.setCode(_code);
-		this.setLibelle(_libelle);
-		this.setPrix(_prix);
-		this.setCategoriePizza(_categoriePizza);
+		id_inc = id;
+		this.setId(id);
+		this.setCode(code);
+		this.setLibelle(libelle);
+		this.setPrix(prix);
+		this.setCategoriePizza(categoriePizza);
 	}
 
 	public int getId() {
