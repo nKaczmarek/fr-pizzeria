@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import fr.pizza.dao.IPizzaDao;
-import fr.pizza.dao.PizzaMemDao;
 import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.model.Pizza;
 

@@ -41,6 +41,21 @@
 			<artifactId>mariadb-java-client</artifactId>
 			<version>1.1.7</version>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.1-api</artifactId>
+			<version>1.0.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.1.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-java8</artifactId>
+			<version>5.1.0.Final</version>
+		</dependency>
 	</dependencies>
 	<profiles>
 		<profile>
@@ -49,7 +64,8 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<use>jdbc</use>
+				<use>fr.pizza.dao.PizzaJdbcDao</use>
+				<provider>fr.pizza.jdbc.DbJdbcProvider</provider>
 				<driver>org.mariadb.jdbc.Driver</driver>
 				<dbUrl>jdbc:mariadb://localhost:3306/pizzeria</dbUrl>
 				<user>root</user>
@@ -59,11 +75,23 @@
 		<profile>
 			<id>cleverCloud</id>
 			<properties>
-				<use>cleverCloud</use>
+				<use>fr.pizza.dao.PizzaJdbcDao</use>
+				<provider>fr.pizza.jdbc.DbJdbcProvider</provider>
 				<driver>org.mariadb.jdbc.Driver</driver>
 				<dbUrl>jdbc:mariadb://blrtabx2r-mysql.services.clever-cloud.com:3306/blrtabx2r</dbUrl>
 				<user>u8gpa4loszx9vywf</user>
 				<pwd>gKAWon0W3IG69vR5ULf</pwd>
+			</properties>
+		</profile>
+		<profile>
+			<id>JPA</id>
+			<properties>
+				<use>fr.pizza.dao.PizzaJpaDao</use>
+				<provider>fr.pizza.jdbc.DbJpaProvider</provider>
+				<driver>org.mariadb.jdbc.Driver</driver>
+				<dbUrl>jdbc:mariadb://localhost:3306/pizzeria</dbUrl>
+				<user>root</user>
+				<pwd></pwd>
 			</properties>
 		</profile>
 	</profiles>

@@ -3,8 +3,6 @@ package fr.pizzeria.factory;
 import java.util.Scanner;
 
 import fr.pizza.dao.IPizzaDao;
-import fr.pizza.dao.PizzaJdbcDao;
-import fr.pizza.dao.PizzaMemDao;
 import fr.pizza.jdbc.Config;
 import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.service.AjouterPizzaService;
@@ -25,12 +23,15 @@ public class MenuServiceFactory {
 
 	public MenuServiceFactory() {
 		scan = new Scanner(System.in);
-		if (Config.use.equals("jdbc") || Config.use.equals("cleverCloud")) {
-			pizzaDao = new PizzaJdbcDao();
-		}
-		else {
-			pizzaDao = new PizzaMemDao();
-		}
+
+		try {
+			Class<?> useDao = Class.forName(Config.use);
+			pizzaDao = (IPizzaDao) useDao.getConstructor().newInstance();
+		} catch (ReflectiveOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+
 		listerPizza = new ListerPizzasService();
 		initPizzaService = new InitPizzaService();
 		ajouterPizza = new AjouterPizzaService();

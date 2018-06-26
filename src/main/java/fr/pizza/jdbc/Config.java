@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 public class Config {
 
 	public static String use;
+	public static String provider;
 	public static String driver;
 	public static String dbUrl;
 	public static String user;
@@ -14,6 +15,7 @@ public class Config {
 		ResourceBundle props = ResourceBundle.getBundle("jdbc");
 		
 		use = props.getString("use");
+		provider = props.getString("provider");
 		driver = props.getString("driver"); 
 		dbUrl = props.getString("dbUrl"); 
 		user = props.getString("user"); 

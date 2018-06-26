@@ -1,0 +1,20 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+	version="2.1">
+	
+	<persistence-unit name="pizzerias" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<class>fr.pizzeria.model.Pizza</class>
+		<properties>
+			<property name="hibernate.archive.autodetection" value="" />
+			<property name="javax.persistence.jdbc.url" value="${dbUrl}" />
+			<property name="javax.persistence.jdbc.user" value="${user}" />
+			<property name="javax.persistence.jdbc.password" value="${pwd}" />
+			<property name="javax.persistence.jdbc.driver" value="${driver}" />
+<!--  			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>  -->
+			<property name="hibernate.show_sql" value="true" />
+		</properties>
+	</persistence-unit>
+</persistence>

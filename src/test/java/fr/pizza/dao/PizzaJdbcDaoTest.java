@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import fr.pizza.jdbc.DbProvider;
+import fr.pizza.jdbc.DbJdbcProvider;
 
 public class PizzaJdbcDaoTest {
 	
@@ -15,14 +15,14 @@ public class PizzaJdbcDaoTest {
 	@Before
 	public void setUp()
 	{
-		DbProvider.load();
+		DbJdbcProvider.load();
 		pDao = new PizzaJdbcDao();
 	}
 	
 	@After
 	public void setDown()
 	{
-		DbProvider.closeConnection();
+		DbJdbcProvider.closeConnection();
 	}
 	
 	@Test

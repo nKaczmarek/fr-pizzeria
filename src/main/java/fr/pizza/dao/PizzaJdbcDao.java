@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.pizza.jdbc.DbProvider;
+import fr.pizza.jdbc.DatabaseProvider;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
@@ -19,7 +19,7 @@ public class PizzaJdbcDao implements IPizzaDao {
 		Statement statement = null;
 		ResultSet result = null;
 		try {
-			statement = DbProvider.getConnection().createStatement();
+			statement = DatabaseProvider.getDatabaseProvider().getConnection().createStatement();
 			result = statement.executeQuery("SELECT * FROM pizzas");
 			while (result.next()) {
 				pizzas.add(new Pizza(result.getInt("id"), result.getString("code"), result.getString("libelle"),
@@ -48,7 +48,7 @@ public class PizzaJdbcDao implements IPizzaDao {
 		if (pizzaExists(pizza.getCode())) {
 			PreparedStatement statement = null;
 			try {
-				statement = DbProvider.getConnection()
+				statement = DatabaseProvider.getDatabaseProvider().getConnection()
 						.prepareStatement("INSERT INTO pizzas(code, libelle, prix, categorie) " + "VALUES (?,?,?,?)");
 				statement.setString(1, pizza.getCode());
 				statement.setString(2, pizza.getLibelle());
@@ -79,7 +79,7 @@ public class PizzaJdbcDao implements IPizzaDao {
 		if (pizzaExists(codePizza)) {
 			PreparedStatement statement = null;
 			try {
-				statement = DbProvider.getConnection()
+				statement = DatabaseProvider.getDatabaseProvider().getConnection()
 						.prepareStatement("UPDATE pizzas SET code=?, libelle=?, prix=?, categorie=? WHERE code=?");
 				statement.setString(1, pizza.getCode());
 				statement.setString(2, pizza.getLibelle());
@@ -110,7 +110,7 @@ public class PizzaJdbcDao implements IPizzaDao {
 		if (pizzaExists(codePizza)) {
 			PreparedStatement statement = null;
 			try {
-				statement = DbProvider.getConnection().prepareStatement("DELETE FROM pizzas WHERE code = ?");
+				statement = DatabaseProvider.getDatabaseProvider().getConnection().prepareStatement("DELETE FROM pizzas WHERE code = ?");
 				statement.setString(1, codePizza);
 				statement.executeQuery();
 			} catch (SQLException e) {
@@ -135,7 +135,7 @@ public class PizzaJdbcDao implements IPizzaDao {
 		if (pizzaExists(codePizza)) {
 			PreparedStatement statement = null;
 			try {
-				statement = DbProvider.getConnection().prepareStatement("SELECT * FROM pizzas WHERE code = ?");
+				statement = DatabaseProvider.getDatabaseProvider().getConnection().prepareStatement("SELECT * FROM pizzas WHERE code = ?");
 				statement.setString(1, codePizza);
 				statement.executeQuery();
 			} catch (SQLException e) {
@@ -159,7 +159,7 @@ public class PizzaJdbcDao implements IPizzaDao {
 		PreparedStatement statement = null;
 		ResultSet rs = null;
 		try {
-			statement = DbProvider.getConnection()
+			statement = DatabaseProvider.getDatabaseProvider().getConnection()
 					.prepareStatement("SELECT COUNT(*) as nbPizza FROM pizzas WHERE code = ?");
 			statement.setString(1, codePizza);
 			rs = statement.executeQuery();
@@ -199,10 +199,10 @@ public class PizzaJdbcDao implements IPizzaDao {
 		pizzaList.add(new Pizza("FRO", "La 4 fromages", 12.00, CategoriePizza.SANS_VIANDE));
 		pizzaList.add(new Pizza("CAN", "La cannibale", 12.50, CategoriePizza.VIANDE));
 		pizzaList.add(new Pizza("SAV", "La savoyarde", 13.00, CategoriePizza.VIANDE));
-		pizzaList.add(new Pizza("ORI", "L'orientale", 13.50, CategoriePizza.VIANDE));
+		pizzaList.add(new Pizza("ORI", "L'orientale",13.50, CategoriePizza.VIANDE));
 		pizzaList.add(new Pizza("IND", "L'indienne", 14.00, CategoriePizza.VIANDE));
 		try {
-			statement = DbProvider.getConnection().prepareStatement("TRUNCATE TABLE pizzas");
+			statement = DatabaseProvider.getDatabaseProvider().getConnection().prepareStatement("TRUNCATE TABLE pizzas");
 			statement.executeQuery();
 
 			for (Pizza p : pizzaList) {

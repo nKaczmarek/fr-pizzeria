@@ -9,7 +9,7 @@ public enum CategoriePizza {
 	
 	private CategoriePizza(String s)
 	{
-		this.categoriePizza = s;
+		this.setCategoriePizza(s);
 	}
 	
 	public CategoriePizza getCategorie(int i)
@@ -20,5 +20,13 @@ public enum CategoriePizza {
 			return POISSON;
 		else
 			return SANS_VIANDE;
+	}
+
+	public String getCategoriePizza() {
+		return categoriePizza;
+	}
+
+	public void setCategoriePizza(String categoriePizza) {
+		this.categoriePizza = categoriePizza;
 	}
 }
